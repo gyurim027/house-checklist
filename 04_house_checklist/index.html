@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>집 보러 갈 때 10분 체크</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div id="app" class="app-container">
+
+  <header class="app-header">
+    <h1>집 보러 갈 때 10분 체크</h1>
+    <p class="subtitle">현장에서 직접 확인하고 기록하세요.</p>
+  </header>
+
+  <section id="saved-inspections-panel" class="panel">
+    <div class="panel-row">
+      <button id="btn-toggle-saved" type="button" class="link-button">최근 체크한 집 (0)</button>
+      <button id="btn-new-inspection" type="button" class="secondary-button">새 집 체크하기</button>
+    </div>
+    <ul id="saved-inspections-list" class="saved-list" hidden></ul>
+  </section>
+
+  <section id="empty-state" class="empty-state">
+    <p class="empty-title">집 보러 가셨나요?</p>
+    <p class="empty-desc">주소를 검색하고<br>10분 체크를 시작해보세요.</p>
+    <button id="btn-empty-search" type="button" class="primary-button">주소 또는 건물명 검색</button>
+  </section>
+
+  <main id="inspection-view" hidden>
+
+    <section id="address-search" class="card">
+      <h2 class="card-title">주소</h2>
+      <div id="address-display" class="address-display" hidden></div>
+      <button id="btn-search-address" type="button" class="primary-button">주소 또는 건물명을 검색하세요</button>
+      <button id="btn-change-address" type="button" class="link-button" hidden>주소 변경</button>
+    </section>
+
+    <section id="property-info" class="card">
+      <h2 class="card-title">기본 매물 정보</h2>
+      <label class="field">
+        <span class="field-label">방문일</span>
+        <input type="date" id="input-visit-date">
+      </label>
+      <label class="field">
+        <span class="field-label">방문시간</span>
+        <input type="time" id="input-visit-time">
+      </label>
+      <label class="field">
+        <span class="field-label">중개사 / 연락처</span>
+        <input type="text" id="input-realtor" placeholder="예: OO부동산 / 010-0000-0000">
+      </label>
+      <label class="field">
+        <span class="field-label">보증금 / 매매가</span>
+        <input type="text" id="input-price" placeholder="예: 3억 5,000만 원">
+      </label>
+      <label class="field">
+        <span class="field-label">월세</span>
+        <input type="text" id="input-monthly-rent" placeholder="예: 80만 원">
+      </label>
+      <label class="field">
+        <span class="field-label">관리비</span>
+        <input type="text" id="input-management-fee" placeholder="예: 12만 원">
+      </label>
+    </section>
+
+    <section id="progress" class="card">
+      <p id="progress-text">현재 0 / 0개 확인</p>
+      <div class="progress-bar"><div id="progress-bar-fill" class="progress-bar-fill"></div></div>
+    </section>
+
+    <section id="checklist"></section>
+
+    <section id="evaluation" class="card">
+      <h2 class="card-title">현장 즉시 평가</h2>
+
+      <h3 class="section-heading">장점 3가지</h3>
+      <input type="text" class="pros-input" data-index="0" placeholder="1.">
+      <input type="text" class="pros-input" data-index="1" placeholder="2.">
+      <input type="text" class="pros-input" data-index="2" placeholder="3.">
+
+      <h3 class="section-heading">단점 3가지</h3>
+      <input type="text" class="cons-input" data-index="0" placeholder="1.">
+      <input type="text" class="cons-input" data-index="1" placeholder="2.">
+      <input type="text" class="cons-input" data-index="2" placeholder="3.">
+
+      <h3 class="section-heading">추가 확인 필요</h3>
+      <div id="followups-list" class="item-group"></div>
+      <input type="text" id="followup-other-text" class="followup-other-input" placeholder="기타 내용을 입력하세요" hidden>
+    </section>
+
+    <section id="final-decision" class="card">
+      <h2 class="card-title">최종 판단</h2>
+      <div id="final-decision-options" class="radio-group"></div>
+
+      <h3 class="section-heading">한 줄 평가</h3>
+      <input type="text" id="input-summary" placeholder="이 집에 대한 느낌을 한 줄로 남겨보세요.">
+    </section>
+
+    <section id="save-area" class="card">
+      <p id="save-status" class="save-status"></p>
+      <p id="completion-banner" class="completion-banner" hidden></p>
+      <button id="btn-save" type="button" class="primary-button">현재 내용 저장</button>
+    </section>
+
+  </main>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<div id="confirm-modal" class="modal-overlay" hidden>
+  <div class="modal-box">
+    <p id="confirm-modal-message" class="modal-message"></p>
+    <div class="modal-actions">
+      <button id="confirm-modal-cancel" type="button" class="secondary-button">취소</button>
+      <button id="confirm-modal-confirm" type="button" class="primary-button">확인</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://t1.daum.net/postcode/Postcode.js"></script>
+<script src="./js/checklist-data.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>
